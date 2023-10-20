@@ -4,7 +4,6 @@ from aiogram import Router, types
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from loader import db, bot
-from keyboards.inline.buttons import are_you_sure_markup
 from states.test import AdminState
 from filters.admin import IsBotAdminFilter
 from data.config import ADMINS

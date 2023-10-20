@@ -48,7 +48,7 @@ class Database:
         id SERIAL PRIMARY KEY,
         full_name VARCHAR(255) NOT NULL,
         username varchar(255) NULL,
-        telegram_id BIGINT NOT NULL UNIQUE
+        user_id BIGINT NOT NULL UNIQUE
         );
         """
         await self.execute(sql, execute=True)
@@ -60,9 +60,9 @@ class Database:
         )
         return sql, tuple(parameters.values())
 
-    async def add_user(self, full_name, username, telegram_id):
-        sql = "INSERT INTO users (full_name, username, telegram_id) VALUES($1, $2, $3) returning *"
-        return await self.execute(sql, full_name, username, telegram_id, fetchrow=True)
+    async def add_user(self, full_name, username, user_id):
+        sql = "INSERT INTO users (full_name, username, user_id) VALUES($1, $2, $3) returning *"
+        return await self.execute(sql, full_name, username, user_id, fetchrow=True)
 
     async def select_all_users(self):
         sql = "SELECT * FROM Users"
@@ -78,7 +78,7 @@ class Database:
         return await self.execute(sql, fetchval=True)
 
     async def update_user_username(self, username, telegram_id):
-        sql = "UPDATE Users SET username=$1 WHERE telegram_id=$2"
+        sql = "UPDATE Users SET username=$1 WHERE user_id=$2"
         return await self.execute(sql, username, telegram_id, execute=True)
 
     async def delete_users(self):
